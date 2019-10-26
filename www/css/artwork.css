@@ -1,7 +1,7 @@
 /*****************************************
-*        
+*
 *            CSS-Style-Sheet
-*        
+*
 *****************************************/
 
 
@@ -10,22 +10,33 @@
 *****************************************/
 
 body {
-    background-color: #d3c7c7;
+    background-color: #0E1418;
     margin: 0px;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: "Porsche Next";
 }
+
 
 
 /* Format of main page*/
 
+.table{
+
+}
+
+.header{
+  background-color: #D5001C;
+}
+
 #content {
     display: inline-block;
-    background: #eee;
-    padding: 10px;
-    margin-top: 10px;
+    background: #1A2023;
+    padding: 15px;
+    margin-top: 20px;
     margin-bottom: 10px;
+    color: #FFFFFF;
 }
+
 
 #content_camera {
     display: inline-block;
@@ -89,7 +100,7 @@ input[type=text] {
     width: 100%;
     padding: 10px 0;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Porsche Next;
     font-weight: bold;
     font-size: 130%;
     color: red;
@@ -174,34 +185,35 @@ input[type=text] {
 
 /*****************************************
 	Hyperlinks in a box with Hover-Effect
-	
+
 (alle Hyperlinks die nicht die id:unique haben so formatieren
 --> der mit id:unique hat keine formattierung)
 *****************************************/
 
 a:link:not(#unique),
 a:visited:not(#unique) {
-    background-color: white;
+    text-align: center;
+    background-color: #FFFFFF;
     color: black;
-    border: 2px solid #e20d17;
+    border: 2px solid #D5001C;
     padding: 10px 20px;
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
     margin-left: 10px;
-    margin-top: 5px;
-    width: 100px;
+    margin-top: 10px;
+    width: 120px;
 }
 
 a:hover:not(#unique),
 a:active:not(#unique) {
-    background-color: #e20d17;
-    color: white;
+    background-color: #D5001C;
+    color: #FFFFFF;
 }
 
 
 /*****************************************
-		Normal Button mit Hover Effect 
+		Normal Button mit Hover Effect
 		color: #dcd7d7!important;
 *****************************************/
 
@@ -234,7 +246,7 @@ input[disabled] {
 
 
 /*****************************************
-		Home-Button mit Hover Effect 
+		Home-Button mit Hover Effect
 *****************************************/
 
 .button {

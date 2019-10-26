@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link rel="stylesheet" type="text/css" href="css/artwork.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <!--   <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+    <script type="text/javascript" src="js/getMediaElement.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <!--   Cordova.JS wird beim Bauen automatisch ergänzt, deshalb passt die Pfadangabe so -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <script type="text/javascript">
+      // if (setting_vibro == 1) {
+      //   navigator.vibrate(1000);
+      // }
+
+    </script>
+</head>
+
+<body>
+  <div id="content">
+      <div>
+          <a href="index.html" id="unique">
+              <img src="logo.png" alt="logo" id="center">
+          </a>
+          <div class="grid-layout">
+            <div class="grid-item-header">Flugdaten</div>
+            <div class="grid-item">Departure:</div>
+            <div class="grid-item" id="departure">11 Uhr</div>
+            <div class="grid-item">Terminal:</div>
+            <div class="grid-item" id="terminal">T3</div>
+            <div class="grid-item">Gate:</div>
+            <div class="grid-item" id="gate">334</div>
+          </div>
+      </div>
+      <a href="index.html">Back</a>
+
+</body>
+
+</html>

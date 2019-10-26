@@ -121,7 +121,7 @@
             window.location.replace("index.html");
         }
 
-        // Stage Director or normal Camera Men		
+        // Stage Director or normal Camera Men
         if (camera == 0) {
             document.title = "Stage Director";
         } else {
@@ -149,14 +149,14 @@
         setInterval(ausgabe, 1000);
 
         //**********************************************************************
-        //	- Format the colour of the active camera Webpage & play notification sound 
-        // 	- Print list of all cameramen and 
+        //	- Format the colour of the active camera Webpage & play notification sound
+        // 	- Print list of all cameramen and
         //      mark active camera bold
         //      mark preview camera for stage director view
-        //**********************************************************************				
+        //**********************************************************************
         function switch_camera(camera_active) {
 
-            //Print List of Cameramen and mark active camera		
+            //Print List of Cameramen and mark active camera
             var result = "";
 
             for (var i = 0; i < cameramen.length; i++) {
@@ -172,7 +172,7 @@
                 }
                 document.getElementById('results').innerHTML = result;
 
-                // Stage Director or normal Camera Men		
+                // Stage Director or normal Camera Men
                 if (camera == 0) {
                     document.getElementById('heading').innerHTML = "Stage - Director"
                 } else {
@@ -287,10 +287,10 @@
 
 <body onload="load()">
     <!-- Status Bar -->
-    <div id="myStatus">Status</div>
+    <!--<div id="myStatus">Status</div>-->
 
     <!-- Main Site Content -->
-    <div id="content_camera">
+    <!--<div id="content_camera">
         <button class="button" onclick="location.href='index.html'">
                     <span>Home</span>
         </button>
@@ -310,12 +310,12 @@
         </label>
 
         <div id="audios-container" style="margin-top: 5%;"></div>
-    </div>
+    </div>-->
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <!--<div id="myModal" class="modal">-->
         <!-- Modal content -->
-        <div class="modal-content">
+        <!--<div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
                 <h2>Configuration</h2>
@@ -372,7 +372,7 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks the button, open the modal 
+        // When the user clicks the button, open the modal
         btn.onclick = function() {
             modal.style.display = "block";
         }
@@ -392,7 +392,7 @@
                 load_settings();
             }
         }
-    </script>
+    </script>-->
 
 </body>
 

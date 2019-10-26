@@ -3,91 +3,88 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="telephone=yes" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
-    <title>Artwork Company</title>
+    <title>Porsche flight advisor</title>
 
     <link rel="stylesheet" type="text/css" href="css/artwork.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <script type="text/javascript" src="js/dojo.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-
     <script type="text/javascript">
-        // get Setting data
-        var setting_address = localStorage.getItem('address');
-        // if connection address empty, reset to default
-        if (setting_address === "") {
-            var webaddress = "http://192.168.10.23:9001/artwork/data.txt";
-            localStorage.setItem("address", webaddress);
-            setting_address = webaddress;
-            alert('Connection address was empty and therefore reset to default.');
+
+      var url;
+      var id;
+      var api = 'http://85.235.67.239:5000/apiv1/fligthid?id=';
+
+      var requestID = new XMLHttpRequest();
+      requestID.open('GET','http://85.235.67.239:5000/apiv1/fligthstate');
+      requestID.onload = function () {
+        if (this.status == 200) {
+          var data = JSON.parse(requestID.responseText);
+          id = data.fligth_id;
+          url = api + id;
         }
+      };
+      requestID.send();
 
-        /*
-        //Splash Screen manuell ein/ bzw. ausblenden
-        navigator.splashscreen.show();
-        window.setTimeout(function () {
-        navigator.splashscreen.hide();
-        }, splashDuration - fadeDuration);
-        */
+      setTimeout(requestDetail, 200);
 
-        //**********************************************************************
-        //		für Android die Taschenlampe ausschalten, wenn die App über Back-Button verlassen wird.
-        //**********************************************************************
-        document.addEventListener("backbutton", function() {
-            // pass exitApp as callbacks to the switchOff method
-            window.plugins.flashlight.switchOff(exitApp, exitApp);
-        }, false);
+      function requestDetail() {
+        var requestDetails = new XMLHttpRequest();
+        requestDetails.open('GET', url) ;
+        requestDetails.onreadystatechange = function(){
+          if (this.readyState == 4 && this.status ==200) {
+            var data = JSON.parse(requestDetails.responseText);
+            renderDetail(data);
+          }
+        };
+        requestDetails.send();
+      }
 
-        function exitApp() {
-            navigator.app.exitApp();
+
+      function renderDetail(data){
+        document.getElementById('gate').innerHTML = data.Gate;
+        document.getElementById('terminal').innerHTML = data.Terminal;
+        document.getElementById('departure').innerHTML = data.Plan.slice(11,16);
+      }
+
+
+      var request = new XMLHttpRequest();
+      request.open('GET', 'http://85.235.67.239:5000/apiv1/waiting', true) ;
+      request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status ==200) {
+          var data = JSON.parse(request.responseText);
+          data = data.data;
+          renderHTML(data);
         }
+      };
+      request.send();
 
-        //**********************************************************************
-        //		Dojo implementation
-        //**********************************************************************
-        function ausgabe() {
-
-            dojo.xhrGet({
-                url: setting_address,
-                handleAs: "javascript",
-                timeout: 5000,
-                load: function(response, ioArgs) {
-                    //  dojo.byId("results").innerHTML = response;
-                    return response;
-                },
-                error: function(response, ioArgs) {
-                    alert('No Server Connection.');
-                    console.error("HTTP status code: ", ioArgs.xhr.status);
-                    return response;
-                }
-            });
-
-            //Monitor dauerhaft angeschaltet lassen (kein Timeout)
-            window.plugins.insomnia.keepAwake();
-            //wieder ausschalten
-            //window.plugins.insomnia.allowSleepAgain();
+      function renderHTML(data){
+        for (var i = 0; i < data.length; i++) {
+          //console.log(data[i].Terminal);
+          switch (data[i].Terminal) {
+            case "T1":
+              document.getElementById('Terminal 1').innerHTML = data[i].WaitTime + " min";
+              break;
+            case "T2":
+              document.getElementById('Terminal 2').innerHTML = data[i].WaitTime+ " min";
+              break;
+            case "T3":
+              document.getElementById('Terminal 3').innerHTML = data[i].WaitTime+ " min";
+              break;
+            default:
+              console.log("illegal terminal");
+          }
         }
-        dojo.addOnLoad(ausgabe);
-        setInterval(ausgabe, 1000);
-
-        //**********************************************************************
-        //		Print a Hyperlink List of all cameramen, that lead to 
-        // 		the single camera specific Webpages
-        //**********************************************************************	
-        function switch_camera(camera_active) {
-            var result = ""
-            for (var i = 0; i < cameramen.length; i++) {
-                var j = i + 1;
-                result = result + " <a href='" + "camera.html?number=" + [j] + "'>" + cameramen[i] + "</a>" + "<br/>";
-            }
-            document.getElementById('results').innerHTML = result
-        }
+      }
     </script>
+
 </head>
 
 <body>
@@ -96,17 +93,46 @@
             <a href="index.html" id="unique">
                 <img src="logo.png" alt="logo" id="center">
             </a>
-            <b> - Camera Management -</b>
-            <br/>
+            <table style="width:100%" class="table">
+              <tr>
+                <td colspan="2"><div class="header">Flugdaten</div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item1">Departure:</div></td>
+                <td><div class="grid-item2" id="departure"></div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item">Terminal:</div></td>
+                <td><div class="grid-item" id="terminal"></div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item">Gate:</div></td>
+                <td><div class="grid-item" id="gate"></div></td>
+              </tr>
+            </table>
+            <br>
+            <table style="width:100%" class="table">
+              <tr>
+                <td colspan="2"><div class="header">Wartezeiten</div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item">Security Checkpoint T1</div></td>
+                <td><div class="grid-item" id="Terminal 1"></div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item">Security Checkpoint T2</div></td>
+                <td><div class="grid-item" id="Terminal 2"></div></td>
+              </tr>
+              <tr>
+                <td><div class="grid-item">Security Checkpoint T3</div></td>
+                <td><div class="grid-item" id="Terminal 3"></div></td>
+              </tr>
+            </table>
         </div>
-
-        <i class="fa fa-cog fa-2x" onclick="location.href='settings.html'"></i>
-
-        <h3>Select Cameramen</h3>
-        <b id="results"></b>
-        <hr/>
-        <h3>Administration</h3>
-        <a href="camera.html?number=0">Select Director</a>
+        <br>
+        <br>
+        <a href="flugdetails.html">Flugdetails</a><br>
+        <a href="aufenhaltsangebote.html">Aufenhaltsplanung</a>
     </div>
 
 </body>
