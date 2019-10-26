@@ -1,0 +1,53 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-chrome-apps-power": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-iosrtc": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-flashlight": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-media": {
+      "MICROPHONE_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "rmc3.audioconference"
+    }
+  }
+}

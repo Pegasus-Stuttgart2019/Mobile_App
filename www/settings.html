@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link rel="stylesheet" type="text/css" href="css/artwork.css">
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+        var webaddress = "http://192.168.10.23:9001/artwork/data.txt";
+
+        //Functions to save settings to local storage
+        function save_checkbox(id) {
+            if (id == "checkbox_flash") {
+                window.plugins.flashlight.available(function(isAvailable) {
+                    if (isAvailable) {
+                        // Set Status
+                        var checkbox = document.getElementById(id);
+                        localStorage.setItem(id, checkbox.checked);
+                        window.plugins.flashlight.switchOff();
+                    } else {
+                        alert('Flashlight not available on this device');
+                    }
+                });
+            } else {
+                var checkbox = document.getElementById(id);
+                localStorage.setItem(id, checkbox.checked);
+            }
+        }
+
+        function save_text(id) {
+            var text_content = document.getElementById(id);
+            localStorage.setItem(id, text_content.value);
+        }
+
+        function load() {
+            var text_content = localStorage.getItem('address');
+            document.getElementById("address").value = text_content;
+
+            var checked = JSON.parse(localStorage.getItem('checkbox_audio'));
+            document.getElementById("checkbox_audio").checked = checked;
+
+            var checked = JSON.parse(localStorage.getItem('checkbox_flash'));
+            document.getElementById("checkbox_flash").checked = checked;
+
+            var checked = JSON.parse(localStorage.getItem('checkbox_vibro'));
+            document.getElementById("checkbox_vibro").checked = checked;
+
+            var checked = JSON.parse(localStorage.getItem('checkbox_blink'));
+            document.getElementById("checkbox_blink").checked = checked;
+        }
+
+        function reset() {
+            location.reload();
+            localStorage.clear();
+            document.getElementById("address").value = webaddress;
+            save_text("address");
+        }
+
+        function goBack() {
+            window.history.back();
+            //history.go(0);
+            //history.go(-1);
+            navigator.app.backHistory();
+        }
+    </script>
+</head>
+
+<body onload="load()">
+    <div id="content_camera">
+        <button class="button" onclick="location.href='index.html'">
+					<span>Home</span>
+		</button>
+
+        <h2 id="heading">Configuration</h2>
+
+        <div id="content_settings">
+            <p>
+                <input type="checkbox" id="checkbox_audio" onclick="save_checkbox(id)" />
+                <label for="checkbox_audio">
+                    Audio-Signal?
+                </label>
+            </p>
+            <p>
+                <input type="checkbox" id="checkbox_flash" onclick="save_checkbox(id)" />
+                <label for="checkbox_flash">
+                    Flashlight?
+                </label>
+            </p>
+            <p>
+                <input type="checkbox" id="checkbox_vibro" onclick="save_checkbox(id)" />
+                <label for="checkbox_vibro">
+                    Vibration?
+                </label>
+            </p>
+            <p>
+                <input type="checkbox" id="checkbox_blink" onclick="save_checkbox(id)" />
+                <label for="checkbox_blink">
+                    Blinking Screen?
+                </label>
+            </p>
+        </div>
+
+        <hr/>
+        <p><b>Webaddress:</b></p>
+        <input type="text" id="address" onchange="save_text(id)" value=webaddress></input>
+        <p><input class="button_normal" id="reset" type="button" value="Reset to default" onclick="reset()" ;/input></p>
+    </div>
+</body>
+
+</html>

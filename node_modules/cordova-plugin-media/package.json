@@ -1,0 +1,141 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-media@3.0.1",
+      "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference"
+    ]
+  ],
+  "_from": "cordova-plugin-media@3.0.1",
+  "_id": "cordova-plugin-media@3.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cordova-plugin-media",
+  "_nodeVersion": "6.10.1",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-media-3.0.1.tgz_1493685767701_0.2465546082239598"
+  },
+  "_npmUser": {
+    "email": "maj.fil@gmail.com",
+    "name": "filmaj"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "cordova-plugin-media",
+    "raw": "cordova-plugin-media@3.0.1",
+    "rawSpec": "3.0.1",
+    "scope": null,
+    "spec": "3.0.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-media/-/cordova-plugin-media-3.0.1.tgz",
+  "_shasum": "5e46e76cfa77d4ed28a87598cb0728e4ebab6f27",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-media@3.0.1",
+  "_where": "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference",
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-media/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-media",
+    "platforms": [
+      "amazon-fireos",
+      "android",
+      "blackberry10",
+      "ios",
+      "tizen",
+      "ubuntu",
+      "windows",
+      "windows8",
+      "wp7",
+      "wp8"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova Media Plugin",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "5e46e76cfa77d4ed28a87598cb0728e4ebab6f27",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-media/-/cordova-plugin-media-3.0.1.tgz"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "3.0.0": {
+        "cordova-android": ">=6.1.0"
+      },
+      "4.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "homepage": "https://github.com/apache/cordova-plugin-media#readme",
+  "keywords": [
+    "cordova",
+    "cordova-amazon-fireos",
+    "cordova-android",
+    "cordova-blackberry10",
+    "cordova-ios",
+    "cordova-tizen",
+    "cordova-ubuntu",
+    "cordova-windows",
+    "cordova-windows8",
+    "cordova-wp7",
+    "cordova-wp8",
+    "ecosystem:cordova",
+    "media"
+  ],
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "bowserj",
+      "email": "bowserj@apache.org"
+    },
+    {
+      "name": "csantanapr",
+      "email": "csantana23@gmail.com"
+    },
+    {
+      "name": "filmaj",
+      "email": "maj.fil@gmail.com"
+    },
+    {
+      "name": "kotikov.vladimir",
+      "email": "kotikov.vladimir@gmail.com"
+    },
+    {
+      "name": "purplecabbage",
+      "email": "purplecabbage@gmail.com"
+    },
+    {
+      "name": "shazron",
+      "email": "shazron@gmail.com"
+    },
+    {
+      "name": "stevegill",
+      "email": "stevengill97@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-media",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-media.git"
+  },
+  "scripts": {
+    "jshint": "jshint www && jshint src && jshint tests",
+    "test": "npm run jshint"
+  },
+  "types": "./types/index.d.ts",
+  "version": "3.0.1"
+}

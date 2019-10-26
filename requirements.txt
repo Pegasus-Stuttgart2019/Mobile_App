@@ -1,0 +1,18 @@
+Requirements:
+
+1) MacOSX latest
+2) XCode latest
+3) iOS latest
+
+    It is both for XCode emulators as well as real iPhone6 device.
+    Your iPhone6 device MUST also have same iOS version.
+    Your iPhone6 device MUST be using same WiFi.
+    Your iPhone6 device should be connected with MacBook using USB cable.
+
+    iTunes app MUST be able to recognize your real iPhone6.
+
+4) Android Studio latest
+
+
+npm install cordova -g
+npm install xcode -g

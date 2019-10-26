@@ -1,0 +1,106 @@
+{
+  "cordova-plugin-chrome-apps-power": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-chrome-apps-power@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-dialogs": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-dialogs"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-crosswalk-webview": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-crosswalk-webview@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-iosrtc": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-iosrtc@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@latest"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-flashlight": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-flashlight"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-compat": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-compat@^1.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-media": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-media@3.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-file": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-file@^4.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-vibration": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-vibration"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-splashscreen": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-splashscreen@4.0.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-insomnia": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-insomnia"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

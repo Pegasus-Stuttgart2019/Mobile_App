@@ -1,0 +1,132 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-vibration",
+      "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference"
+    ]
+  ],
+  "_from": "cordova-plugin-vibration@latest",
+  "_id": "cordova-plugin-vibration@2.1.5",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cordova-plugin-vibration",
+  "_nodeVersion": "6.10.1",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-vibration-2.1.5.tgz_1493685658179_0.5779761432204396"
+  },
+  "_npmUser": {
+    "email": "maj.fil@gmail.com",
+    "name": "filmaj"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "cordova-plugin-vibration",
+    "raw": "cordova-plugin-vibration",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-vibration/-/cordova-plugin-vibration-2.1.5.tgz",
+  "_shasum": "485353a2fdfce71b0e4809c3f55771f8fa3e0623",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-vibration",
+  "_where": "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference",
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-vibration/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-vibration",
+    "platforms": [
+      "amazon-fireos",
+      "android",
+      "blackberry10",
+      "firefoxos",
+      "ios",
+      "tizen",
+      "ubuntu",
+      "wp7",
+      "wp8"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova Vibration Plugin",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "485353a2fdfce71b0e4809c3f55771f8fa3e0623",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-vibration/-/cordova-plugin-vibration-2.1.5.tgz"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "3.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "homepage": "https://github.com/apache/cordova-plugin-vibration#readme",
+  "keywords": [
+    "cordova",
+    "cordova-amazon-fireos",
+    "cordova-android",
+    "cordova-blackberry10",
+    "cordova-firefoxos",
+    "cordova-ios",
+    "cordova-tizen",
+    "cordova-ubuntu",
+    "cordova-wp7",
+    "cordova-wp8",
+    "ecosystem:cordova",
+    "vibration"
+  ],
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "bowserj",
+      "email": "bowserj@apache.org"
+    },
+    {
+      "name": "csantanapr",
+      "email": "csantana23@gmail.com"
+    },
+    {
+      "name": "filmaj",
+      "email": "maj.fil@gmail.com"
+    },
+    {
+      "name": "purplecabbage",
+      "email": "purplecabbage@gmail.com"
+    },
+    {
+      "name": "shazron",
+      "email": "shazron@gmail.com"
+    },
+    {
+      "name": "stevegill",
+      "email": "stevengill97@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-vibration",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-vibration.git"
+  },
+  "scripts": {
+    "jshint": "jshint www && jshint src && jshint tests",
+    "test": "npm run jshint"
+  },
+  "types": "./types/index.d.ts",
+  "version": "2.1.5"
+}

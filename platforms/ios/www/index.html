@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <title>Artwork Company</title>
+
+    <link rel="stylesheet" type="text/css" href="css/artwork.css">
+    <script type="text/javascript" src="js/dojo.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script type="text/javascript">
+        // get Setting data
+        var setting_address = localStorage.getItem('address');
+        // if connection address empty, reset to default
+        if (setting_address == "") {
+            var webaddress = "http://192.168.10.23:9001/artwork/data.txt";
+            localStorage.setItem("address", webaddress);
+            setting_address = webaddress;
+            alert('Connection address was empty and therefore reset to default.');
+        }
+
+        //**********************************************************************
+        //		für Android die Taschenlampe ausschalten, wenn die App über Back-Button verlassen wird.
+        //**********************************************************************
+        document.addEventListener("backbutton", function() {
+            // pass exitApp as callbacks to the switchOff method
+            window.plugins.flashlight.switchOff(exitApp, exitApp);
+        }, false);
+
+        function exitApp() {
+            navigator.app.exitApp();
+        }
+
+        //**********************************************************************
+        //		Dojo implementation
+        //**********************************************************************
+        function ausgabe() {
+            dojo.xhrGet({
+                url: setting_address,
+                handleAs: "javascript",
+                timeout: 5000,
+                load: function(response, ioArgs) {
+                    //  dojo.byId("results").innerHTML = response;
+                    return response;
+                },
+                error: function(response, ioArgs) {
+                    alert('No Server Connection.');
+                    console.error("HTTP status code: ", ioArgs.xhr.status);
+                    return response;
+                }
+            });
+        }
+        dojo.addOnLoad(ausgabe);
+        setInterval(ausgabe, 1000);
+
+        //**********************************************************************
+        //		Print a Hyperlink List of all cameramen, that lead to 
+        // 		the single camera specific Webpages
+        //**********************************************************************	
+        function switch_camera(camera_active) {
+            var result = ""
+            for (var i = 0; i < cameramen.length; i++) {
+                var j = i + 1;
+                result = result + " <a href='" + "camera.html?number=" + [j] + "'>" + cameramen[i] + "</a>" + "<br/>";
+            }
+            document.getElementById('results').innerHTML = result
+        }
+    </script>
+</head>
+
+<body>
+    <div id="content">
+        <div>
+            <a href="index.html" id="unique">
+                <img src="logo.png" alt="logo" id="center">
+            </a>
+            <b> - Camera Management -</b>
+            <br/>
+        </div>
+
+        <a href="settings.html" id="unique">
+            <img src="settings.png" alt="settings">
+        </a>
+
+        <h3>Select Cameramen</h3>
+        <b id="results"></b>
+        <hr/>
+        <h3>Administration</h3>
+        <a href="camera.html?number=0">Select Director</a>
+    </div>
+
+</body>
+
+</html>

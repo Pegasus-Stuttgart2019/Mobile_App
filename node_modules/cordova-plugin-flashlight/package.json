@@ -1,0 +1,98 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-flashlight",
+      "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference"
+    ]
+  ],
+  "_from": "cordova-plugin-flashlight@latest",
+  "_id": "cordova-plugin-flashlight@3.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cordova-plugin-flashlight",
+  "_nodeVersion": "4.2.2",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-flashlight-3.2.0.tgz_1474147649377_0.3714308256749064"
+  },
+  "_npmUser": {
+    "email": "eddyverbruggen@gmail.com",
+    "name": "eddyverbruggen"
+  },
+  "_npmVersion": "2.14.7",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "cordova-plugin-flashlight",
+    "raw": "cordova-plugin-flashlight",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-flashlight/-/cordova-plugin-flashlight-3.2.0.tgz",
+  "_shasum": "d09a40ce30ad36a9f004050124b6e815281fbbb2",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-flashlight",
+  "_where": "C:\\Users\\User\\Downloads\\NodeJSPortable\\Data\\Android_AudioConference",
+  "author": {
+    "email": "eddyverbruggen@gmail.com",
+    "name": "Eddy Verbruggen",
+    "url": "https://github.com/EddyVerbruggen"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-flashlight",
+    "platforms": [
+      "android",
+      "ios",
+      "wp8"
+    ]
+  },
+  "dependencies": {},
+  "description": "This plugin allows you switch the Flashlight / Torch of your device on or off.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "d09a40ce30ad36a9f004050124b6e815281fbbb2",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-flashlight/-/cordova-plugin-flashlight-3.2.0.tgz"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "gitHead": "08ddc47c98ab727b9829271ac2b692d3c3e3acd8",
+  "homepage": "https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin#readme",
+  "keywords": [
+    "Flash",
+    "Flashlight",
+    "Light",
+    "Torch",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-wp8",
+    "ecosystem:cordova"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "eddyverbruggen",
+      "email": "eddyverbruggen@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-flashlight",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin.git"
+  },
+  "scripts": {},
+  "version": "3.2.0"
+}

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="rmc3.audioconference" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="ChromePower">
+        <param name="android-package" value="org.chromium.ChromePower" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Flashlight">
+        <param name="android-package" value="nl.xservices.plugins.Flashlight" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Media">
+        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+    </feature>
+    <feature name="Vibration">
+        <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Insomnia">
+        <param name="android-package" value="nl.xservices.plugins.Insomnia" />
+    </feature>
+    <name>Artwork Cam-Manager</name>
+    <icon src="www/img/icon.png" />
+    <description>
+        Camera Management with Data and Audio Signaling (across all devices &amp; platforms).
+    </description>
+    <author email="artworkcompany@test.com" href="https://www.test.com/">
+        Chris
+    </author>
+    <content src="index.html" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="webView" value="org.crosswalk.engine.XWalkWebViewEngine" />
+    <preference name="xwalkLiteVersion" value="xwalk_core_library_canary:17+" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="WebViewBounce" value="true" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="TopActivityIndicator" value="white" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="xwalkVersion" value="23+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="Orientation" value="default" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
+</widget>

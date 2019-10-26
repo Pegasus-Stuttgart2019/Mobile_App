@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link rel="stylesheet" type="text/css" href="css/artwork.css">
+    <!--   <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+    <script type="text/javascript" src="js/RTCMultiConnection.js"></script>
+    <script type="text/javascript" src="js/getMediaElement.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <script type="text/javascript" src="js/dojo.js"></script>
+    <script type="text/javascript" src="js/howler.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <script type="text/javascript">
+        //Define Variables
+		var webaddress = "http://192.168.10.23:9001/artwork/data.txt";
+        
+		// Load Setting Data
+        var setting_address = localStorage.getItem('address');
+        var setting_audio = JSON.parse(localStorage.getItem('checkbox_audio'));
+        var setting_flash = JSON.parse(localStorage.getItem('checkbox_flash'));
+        var setting_vibro = JSON.parse(localStorage.getItem('checkbox_vibro'));
+        var setting_blink = JSON.parse(localStorage.getItem('checkbox_blink'));
+
+        //Define Alert Sounds to be played when Camera is Acti- Deactivated
+        var sound_activate_played_flag = 0; //flag to let Activate Sound be played only once
+        var sound_deactivate_played_flag = 0; //flag to let Deactivate Sound be played only once
+        var sound_preview_played_flag = 0; //flag to let Deactivate Sound be played only once
+        var blink_counter_red = 0; //counter for blinking the Background-Colour
+        var blink_counter_green = 0; //counter for blinking the Background-Colour
+        var blink_times = 5; //Number of times, the screen blinks
+
+        var sound_activate = new Howl({
+            src: ['sound_activate.mp3', 'sound_activate.wav']
+        });
+        var sound_deactivate = new Howl({
+            src: ['sound_deactivate.mp3', 'sound_deactivate.wav']
+        });
+		
+		//**********************************************************************
+        //		Functions to load and save App-Settings
+        //**********************************************************************
+
+        //Functions to save settings to local storage
+        function save_checkbox(id) {
+            if (id == "checkbox_flash") {
+                window.plugins.flashlight.available(function(isAvailable) {
+                    if (isAvailable) {
+                        // Set Status
+                        var checkbox = document.getElementById(id);
+                        localStorage.setItem(id, checkbox.checked);
+						window.plugins.flashlight.switchOff();
+                    } else {
+                        alert('Flashlight not available on this device');
+                    }
+                });			
+            } else {
+                var checkbox = document.getElementById(id);
+                localStorage.setItem(id, checkbox.checked);
+            }
+        }
+		
+        function save_text(id) {
+            var text_content = document.getElementById(id);
+            localStorage.setItem(id, text_content.value);
+        }
+
+        function load() {
+            setting_address = localStorage.getItem('address');
+            document.getElementById("address").value = setting_address;
+						
+            setting_audio = JSON.parse(localStorage.getItem('checkbox_audio'));
+            document.getElementById("checkbox_audio").checked = setting_audio;
+						
+            setting_flash = JSON.parse(localStorage.getItem('checkbox_flash'));
+            document.getElementById("checkbox_flash").checked = setting_flash;
+						
+            setting_vibro = JSON.parse(localStorage.getItem('checkbox_vibro'));
+            document.getElementById("checkbox_vibro").checked = setting_vibro;
+			
+			setting_blink = JSON.parse(localStorage.getItem('checkbox_blink'));
+            document.getElementById("checkbox_blink").checked = setting_blink;
+        }
+		
+        function reset() {
+            location.reload();
+            localStorage.clear();
+            document.getElementById("address").value = webaddress;
+            save_text("address");
+        }
+
+        //**********************************************************************
+        //		Logic Functions for camera management
+        //**********************************************************************
+
+        //Parse Camera-Number from URL-String
+        var camera = window.location.search.substring(1).split("number=")[1];
+
+        //If Number ist not a number or not in range, redirect to main page
+        if ((!isNaN(camera) == false) || camera < 0) {
+            window.location.replace("index.html");
+        }
+
+        // Stage Director or normal Camera Men		
+        if (camera == 0) {
+            document.title = "Stage Director";
+        } else {
+            document.title = "Camera " + camera;
+        }
+     
+        //**********************************************************************
+        //		Dojo implementation
+        //**********************************************************************
+        function ausgabe() {
+            dojo.xhrGet({
+                url: setting_address,
+                handleAs: "javascript",
+                timeout: 5000,
+                load: function(response, ioArgs) {
+                    return response;
+                },
+                error: function(response, ioArgs) {
+                    console.error("HTTP status code: ", ioArgs.xhr.status);
+                    return response;
+                }
+            });
+        }
+        dojo.addOnLoad(ausgabe);
+        setInterval(ausgabe, 1000);
+
+        //**********************************************************************
+        //	- Format the colour of the active camera Webpage & play notification sound 
+        // 	- Print list of all cameramen and mark active camera bold
+        //**********************************************************************				
+        function switch_camera(camera_active) {
+
+            //Print List of Cameramen and mark active camera		
+            var result = "";
+
+            for (var i = 0; i < cameramen.length; i++) {
+                var j = i + 1;
+
+                if (j == camera_active) {
+                    result = result + '<span class="active">' + cameramen[i] + "</span>" + "<br/>";
+                } else {
+                    result = result + cameramen[i] + "<br/>";
+                }
+                document.getElementById('results').innerHTML = result;
+
+                // Stage Director or normal Camera Men		
+                if (camera == 0) {
+                    document.getElementById('heading').innerHTML = "Stage Director"
+                } else {
+                    document.getElementById('heading').innerHTML = "Status Cam " + camera + " - " + cameramen[camera - 1];
+                }
+            }
+
+
+            if (camera == 0) {
+                document.body.style.backgroundColor = "#eee";
+            } else if (camera == camera_active) {
+                //++ Camera Active
+
+                if (sound_activate_played_flag == 0) {
+
+                    if (setting_audio == 1) {
+                        sound_activate.play();
+                    }
+                    sound_activate_played_flag = 1;
+                    sound_deactivate_played_flag = 0;
+                    sound_preview_played_flag = 0;
+                    blink_counter_green = 0;
+
+                    if (setting_flash == 1) {
+                        window.plugins.flashlight.switchOn();
+                    }
+
+                    if (setting_vibro == 1) {
+                        navigator.vibrate(2000);
+                    }
+                }
+                //Blink Background Colour when camera gets active
+                if (setting_blink == 1) {
+                    if (blink_counter_red < blink_times) {
+                        if (document.body.style.backgroundColor == "lightsalmon") {
+                            document.body.style.backgroundColor = "salmon";
+                            blink_counter_red++;
+                            return;
+                        } else {
+                            document.body.style.backgroundColor = "lightsalmon";
+                            blink_counter_red++;
+                            return;
+                        }
+                    } else {
+                        document.body.style.backgroundColor = "salmon";
+                    }
+                } else {
+                    document.body.style.backgroundColor = "salmon";
+                }
+
+            } else if (camera == camera_preview) {
+                //++ Camera in Preview
+                document.body.style.backgroundColor = "#fffe67";
+
+                if (sound_preview_played_flag == 0) {
+
+                    sound_activate_played_flag = 0;
+                    sound_deactivate_played_flag = 0;
+                    sound_preview_played_flag = 1;
+                    blink_counter_red = 0;
+                    blink_counter_green = 0;
+
+                    if (setting_flash == 1) {
+                        window.plugins.flashlight.switchOff();
+                    }
+
+                    if (setting_vibro == 1) {
+                        navigator.vibrate(500);
+                    }
+                }
+            } else {
+                //++ Camera Free
+
+                if (sound_deactivate_played_flag == 0) {
+
+                    if (setting_audio == 1) {
+                        sound_deactivate.play();
+                    }
+                    sound_deactivate_played_flag = 1;
+                    sound_activate_played_flag = 0;
+                    sound_preview_played_flag = 0;
+                    blink_counter_red = 0;
+
+                    if (setting_flash == 1) {
+                        window.plugins.flashlight.switchOff();
+                    }
+
+                    if (setting_vibro == 1) {
+                        navigator.vibrate(1000);
+                    }
+                }
+                //Blink Background Colour when camera gets free
+                if (setting_blink == 1) {
+                    if (blink_counter_green < blink_times) {
+                        if (document.body.style.backgroundColor == "lightgreen") {
+                            document.body.style.backgroundColor = "limegreen";
+                            blink_counter_green++;
+                            return;
+                        } else {
+                            document.body.style.backgroundColor = "lightgreen";
+                            blink_counter_green++;
+                            return;
+                        }
+                    } else {
+                        document.body.style.backgroundColor = "lightgreen";
+                    }
+                } else {
+                    document.body.style.backgroundColor = "lightgreen";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="load()">
+    <div id="content_camera">
+        <button class="button" onclick="location.href='index.html'">
+                    <span>Home</span>
+        </button>
+        <img src="settings.png" alt="settings" id="right" onclick="location.href='settings.html'">
+
+        <h2 id="heading">Camera</h2>
+
+        <h3>Active Camera</h3>
+        <p id="results">List of Cameramen</p>
+        <hr/>
+
+        <h2 id="status_heading">Audio Stream</h2>
+        <b id="room-id"></b>
+        <button class="button_normal" id="open-or-join" onclick="start_conference();">Start Audio</button>
+
+        <img src="mic_loud.png" id="mute-switch" width=15% style="margin-left: 10%;">
+
+        <div id="audios-container" style="margin-top: 5%;"></div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Configuration</h2>
+            </div>
+
+            <div id="content_settings">
+                <p>
+                    <input type="checkbox" id="checkbox_audio" onclick="save_checkbox(id)" />
+                    <label for="checkbox_audio">
+                    Audio-Signal?
+                </label>
+                </p>
+                <p>
+                    <input type="checkbox" id="checkbox_flash" onclick="save_checkbox(id)" />
+                    <label for="checkbox_flash">
+                    Flashlight?
+                </label>
+                </p>
+                <p>
+                    <input type="checkbox" id="checkbox_vibro" onclick="save_checkbox(id)" />
+                    <label for="checkbox_vibro">
+                    Vibration?
+                </label>
+                </p>
+                <p>
+                    <input type="checkbox" id="checkbox_blink" onclick="save_checkbox(id)" />
+                    <label for="checkbox_blink">
+                    Blinking Screen?
+                </label>
+                </p>
+
+            </div>
+            <hr/>
+            <div id="content_settings">
+
+                <p><b>Webaddress:</b></p>
+                <input type="text" id="address" onchange="save_text(id)" value=webaddress></input>
+                <p><input class="button_normal" id="reset" type="button" value="Reset to default" onclick="reset()" ;/input></p>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("right");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+			//Reload Settings, so they get activated
+			load();
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+				//Reload Settings, so they get activated
+				load();
+            }	
+        }
+    </script>
+
+</body>
+
+</html>

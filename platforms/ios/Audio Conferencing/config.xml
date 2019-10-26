@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="rmc3.audioconference" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="HandleOpenUrl">
+        <param name="ios-package" value="CDVHandleOpenURL" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="IntentAndNavigationFilter">
+        <param name="ios-package" value="CDVIntentAndNavigationFilter" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="GestureHandler">
+        <param name="ios-package" value="CDVGestureHandler" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="ChromePower">
+        <param name="ios-package" value="ChromePower" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="CDVNotification" />
+    </feature>
+    <feature name="iosrtcPlugin">
+        <param name="ios-package" value="iosrtcPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Flashlight">
+        <param name="ios-package" value="Flashlight" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Media">
+        <param name="ios-package" value="CDVSound" />
+    </feature>
+    <feature name="Vibration">
+        <param name="ios-package" value="CDVVibration" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Insomnia">
+        <param name="ios-package" value="Insomnia" />
+    </feature>
+    <name>Audio Conferencing</name>
+    <icon src="www/img/icon.png" />
+    <description>
+        Peer-to-Peer Audio Conferencing (across all devices &amp; platforms) using WebRTC/RTCMultiConnection.
+    </description>
+    <author email="artworkcompany@test.com" href="https://www.test.com/">
+        Chris
+    </author>
+    <content src="index.html" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
+    <hook src="hooks/iosrtc-swift-support.js" type="after_platform_add" />
+    <config-file parent="CFBundleURLTypes" target="*-Info.plist">
+        <array>
+            <key>NSAppTransportSecurity</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true />
+            </dict>
+        </array>
+    </config-file>
+    <config-file parent="NSMicrophoneUsageDescription" platform="ios" target="*-Info.plist">
+        <string>WebRTC uses your microphone to make voice calls.</string>
+    </config-file>
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="false" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="WebViewBounce" value="true" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="TopActivityIndicator" value="white" />
+    <preference name="xwalkVersion" value="23+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="Orientation" value="all" />
+</widget>
