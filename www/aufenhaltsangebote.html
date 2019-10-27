@@ -38,6 +38,7 @@
       }
 
       function setHTML(data) {
+        document.getElementById('image').src = "https://www.flughafen-stuttgart.de" + data.Images[0];
         document.getElementById('name').innerHTML = data.Name;
         document.getElementById('location').innerHTML = data.Terminal + ", Floor " + data.Floor;
         document.getElementById('status').innerHTML = data.OpenStatus;
@@ -78,6 +79,8 @@
             </tr>
           </table>
       </div>
+      <br>
+      <img src="" alt="" id="image" style="width:300px;">
       <br>
       <button class="nextButton" id = "next" onclick="getShop()">Next</button> <br>
       <a href="index.html">Back</a>
