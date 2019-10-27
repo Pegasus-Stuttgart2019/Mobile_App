@@ -20,17 +20,42 @@ body {
 
 /* Format of main page*/
 
-.table{
-
-}
-
 .header{
   background-color: #D5001C;
 }
 
+.buttons{
+  position: relative;
+  bottom: -10px;
+}
+
+.table{
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.nextButton{
+  text-align: center;
+  background-color: #FFFFFF;
+  color: black;
+  border: 2px solid #D5001C;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 30px;
+  width: 200px;
+}
+
+.nextButton:active{
+  background-color: #D5001C;
+  color: #FFFFFF;
+}
+
 #content {
     display: inline-block;
-    background: #1A2023;
+    background: #0E1418;
     padding: 15px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -192,6 +217,7 @@ input[type=text] {
 
 a:link:not(#unique),
 a:visited:not(#unique) {
+    text-align: center;
     background-color: #FFFFFF;
     color: black;
     border: 2px solid #D5001C;
@@ -200,8 +226,8 @@ a:visited:not(#unique) {
     display: inline-block;
     font-size: 14px;
     margin-left: 10px;
-    margin-top: 10px;
-    width: 100px;
+    margin-top: 30px;
+    width: 120px;
 }
 
 a:hover:not(#unique),

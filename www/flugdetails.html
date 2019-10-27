@@ -23,35 +23,42 @@
       //   navigator.vibrate(1000);
       // }
 
-      var url;
-      var id;
-      var api = 'http://85.235.67.239:5000/apiv1/fligthid?id=';
+      getFlightdetails();
 
-      var requestID = new XMLHttpRequest();
-      requestID.open('GET','http://85.235.67.239:5000/apiv1/fligthstate');
-      requestID.onload = function () {
-        if (this.status == 200) {
-          var data = JSON.parse(requestID.responseText);
-          id = data.fligth_id;
-          url = api + id;
-        }
-      };
-      requestID.send();
+      setInterval(function(){
+        getFlightdetails();
+      },1000);
 
-      setTimeout(requestDetail, 200);
+      function getFlightdetails() {
+        var url;
+        var id;
+        var api = 'http://85.235.67.239:5000/apiv1/fligthid?id=';
 
-      function requestDetail() {
-        var requestDetails = new XMLHttpRequest();
-        requestDetails.open('GET', url) ;
-        requestDetails.onreadystatechange = function(){
-          if (this.readyState == 4 && this.status ==200) {
-            var data = JSON.parse(requestDetails.responseText);
-            renderHTML(data);
+        var requestID = new XMLHttpRequest();
+        requestID.open('GET','http://85.235.67.239:5000/apiv1/fligthstate');
+        requestID.onload = function () {
+          if (this.status == 200) {
+            var data = JSON.parse(requestID.responseText);
+            id = data.fligth_id;
+            url = api + id;
           }
         };
-        requestDetails.send();
-      }
+        requestID.send();
 
+        setTimeout(requestDetail, 200);
+
+        function requestDetail() {
+          var requestDetails = new XMLHttpRequest();
+          requestDetails.open('GET', url) ;
+          requestDetails.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status ==200) {
+              var data = JSON.parse(requestDetails.responseText);
+              renderHTML(data);
+            }
+          };
+          requestDetails.send();
+        }
+      }
 
       function renderHTML(data){
         document.getElementById('flightnum').innerHTML = data.Flight.Number;
@@ -70,21 +77,40 @@
           <a href="index.html" id="unique">
               <img src="logo.png" alt="logo" id="center">
           </a>
-          <div class="grid-layout">
-            <div class="grid-item-header">Flugdaten</div>
-            <div class="grid-item">Departure:</div>
-            <div class="grid-item" id="departure"></div>
-            <div class="grid-item">Terminal:</div>
-            <div class="grid-item" id="terminal"></div>
-            <div class="grid-item">Gate:</div>
-            <div class="grid-item" id="gate"></div>
-            <div class="grid-item">Flightnumber:</div>
-            <div class="grid-item" id="flightnum"></div>
-            <div class="grid-item">Destination:</div>
-            <div class="grid-item" id="dest"></div>
-          </div>
+          <br>
+          <table style="width:100%">
+            <tr>
+              <td colspan="2"><div class="header">All Flightdetails</div></td>
+            </tr>
+          </table>
+          <table style="width:100%" class="table">
+            <tr>
+              <td><div class="grid-item">Departure:</div></td>
+              <td><div class="grid-item" id="departure"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Terminal:</div></td>
+              <td><div class="grid-item" id="terminal"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Gate:</div></td>
+              <td><div class="grid-item" id="gate"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Flightnumber:</div></td>
+              <td><div class="grid-item" id="flightnum"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Destination:</div></td>
+              <td><div class="grid-item" id="dest"></div></td>
+            </tr>
+
+          </table>
       </div>
-      <a href="index.html">Back</a>
+      <div class="buttons">
+        <a href="index.html">Back</a>
+      </div>
+
 
 </body>
 

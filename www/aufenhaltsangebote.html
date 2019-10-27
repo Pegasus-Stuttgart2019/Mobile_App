@@ -17,11 +17,32 @@
     <!--   Cordova.JS wird beim Bauen automatisch ergänzt, deshalb passt die Pfadangabe so -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <style media="screen">
+      tr:nth-child(even){background-color: #7C7F81}
 
+    </style>
     <script type="text/javascript">
-      // if (setting_vibro == 1) {
-      //   navigator.vibrate(1000);
-      // }
+      getShop();
+
+      function getShop() {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://85.235.67.239:5000/apiv1/recomend') ;
+        request.onreadystatechange = function(){
+          if (this.readyState == 4 && this.status ==200) {
+            var data = JSON.parse(request.responseText);
+            data = data.data;
+            setHTML(data);
+          }
+        };
+        request.send();
+      }
+
+      function setHTML(data) {
+        document.getElementById('name').innerHTML = data.Name;
+        document.getElementById('location').innerHTML = data.Terminal + ", Floor " + data.Floor;
+        document.getElementById('status').innerHTML = data.OpenStatus;
+        document.getElementById('info').innerHTML = data.Type;
+      }
 
     </script>
 </head>
@@ -32,16 +53,33 @@
           <a href="index.html" id="unique">
               <img src="logo.png" alt="logo" id="center">
           </a>
-          <div class="grid-layout">
-            <div class="grid-item-header">Flugdaten</div>
-            <div class="grid-item">Departure:</div>
-            <div class="grid-item" id="departure">11 Uhr</div>
-            <div class="grid-item">Terminal:</div>
-            <div class="grid-item" id="terminal">T3</div>
-            <div class="grid-item">Gate:</div>
-            <div class="grid-item" id="gate">334</div>
-          </div>
+          <br>
+          <table style="width:100%">
+            <tr>
+              <td colspan="2"><div class="header">Residence Planning</div></td>
+            </tr>
+          </table>
+          <br>
+          <table style="width:100%" class="table">
+            <tr>
+              <td colspan="2"><div class="grid-item" id="name" style="font-size:18px;"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Where:</div></td>
+              <td><div class="grid-item" id="location"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">Open Status:</div></td>
+              <td><div class="grid-item" id="status"></div></td>
+            </tr>
+            <tr>
+              <td><div class="grid-item">What:</div></td>
+              <td><div class="grid-item" id="info"></div></td>
+            </tr>
+          </table>
       </div>
+      <br>
+      <button class="nextButton" id = "next" onclick="getShop()">Next</button> <br>
       <a href="index.html">Back</a>
 
 </body>

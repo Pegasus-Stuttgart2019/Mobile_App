@@ -17,53 +17,60 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
 
-      var url;
-      var id;
-      var api = 'http://85.235.67.239:5000/apiv1/fligthid?id=';
+      getFlightdetails();
+      getWaiting();
 
-      var requestID = new XMLHttpRequest();
-      requestID.open('GET','http://85.235.67.239:5000/apiv1/fligthstate');
-      requestID.onload = function () {
-        if (this.status == 200) {
-          var data = JSON.parse(requestID.responseText);
-          id = data.fligth_id;
-          url = api + id;
-        }
-      };
-      requestID.send();
+      var loopRequestFlightData = setInterval(function(){
+        getFlightdetails();
+      },1000);
 
-      setTimeout(requestDetail, 200);
+      var loopRequestWaiting = setInterval(function(){
+        getWaiting();
+      },10000);
 
-      function requestDetail() {
-        var requestDetails = new XMLHttpRequest();
-        requestDetails.open('GET', url) ;
-        requestDetails.onreadystatechange = function(){
+      function getWaiting() {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://85.235.67.239:5000/apiv1/waiting', true) ;
+        request.onreadystatechange = function(){
           if (this.readyState == 4 && this.status ==200) {
-            var data = JSON.parse(requestDetails.responseText);
-            renderDetail(data);
+            var data = JSON.parse(request.responseText);
+            data = data.data;
+            renderHTML(data);
           }
         };
-        requestDetails.send();
+        request.send();
       }
 
+      function getFlightdetails() {
+        var url;
+        var id;
+        var api = 'http://85.235.67.239:5000/apiv1/fligthid?id=';
 
-      function renderDetail(data){
-        document.getElementById('gate').innerHTML = data.Gate;
-        document.getElementById('terminal').innerHTML = data.Terminal;
-        document.getElementById('departure').innerHTML = data.Plan.slice(11,16);
-      }
+        var requestID = new XMLHttpRequest();
+        requestID.open('GET','http://85.235.67.239:5000/apiv1/fligthstate');
+        requestID.onload = function () {
+          if (this.status == 200) {
+            var data = JSON.parse(requestID.responseText);
+            id = data.fligth_id;
+            url = api + id;
+          }
+        };
+        requestID.send();
 
+        setTimeout(requestDetail, 200);
 
-      var request = new XMLHttpRequest();
-      request.open('GET', 'http://85.235.67.239:5000/apiv1/waiting', true) ;
-      request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status ==200) {
-          var data = JSON.parse(request.responseText);
-          data = data.data;
-          renderHTML(data);
+        function requestDetail() {
+          var requestDetails = new XMLHttpRequest();
+          requestDetails.open('GET', url) ;
+          requestDetails.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status ==200) {
+              var data = JSON.parse(requestDetails.responseText);
+              renderDetail(data);
+            }
+          };
+          requestDetails.send();
         }
-      };
-      request.send();
+      }
 
       function renderHTML(data){
         for (var i = 0; i < data.length; i++) {
@@ -83,6 +90,12 @@
           }
         }
       }
+
+      function renderDetail(data){
+        document.getElementById('gate').innerHTML = data.Gate;
+        document.getElementById('terminal').innerHTML = data.Terminal;
+        document.getElementById('departure').innerHTML = data.Plan.slice(11,16);
+      }
     </script>
 
 </head>
@@ -93,9 +106,10 @@
             <a href="index.html" id="unique">
                 <img src="logo.png" alt="logo" id="center">
             </a>
+            <br>
             <table style="width:100%" class="table">
               <tr>
-                <td colspan="2"><div class="header">Flugdaten</div></td>
+                <td colspan="2"><div class="header" style="text-align: center;">Flightdetails</div></td>
               </tr>
               <tr>
                 <td><div class="grid-item1">Departure:</div></td>
@@ -113,7 +127,7 @@
             <br>
             <table style="width:100%" class="table">
               <tr>
-                <td colspan="2"><div class="header">Wartezeiten</div></td>
+                <td colspan="2"><div class="header" style="text-align: center;">Waiting Time</div></td>
               </tr>
               <tr>
                 <td><div class="grid-item">Security Checkpoint T1</div></td>
@@ -131,8 +145,11 @@
         </div>
         <br>
         <br>
-        <a href="flugdetails.html">Flugdetails</a><br>
-        <a href="aufenhaltsangebote.html">Aufenhaltsplanung</a>
+        <div class="buttons">
+          <a href="flugdetails.html">All Flightdetails</a><br>
+          <a href="aufenhaltsangebote.html">Residence Planning</a>
+        </div>
+
     </div>
 
 </body>
